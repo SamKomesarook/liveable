@@ -1,4 +1,6 @@
-# Liveable — Neighborhood Analysis Agent
+<video src="Area.mp4" controls width="100%"></video>
+
+# Liveable
 
 Liveable is a Python CLI assistant that takes a US ZIP code and answers neighborhood questions conversationally. It uses the Claude Agent SDK with Laminar observability instrumentation and custom MCP tools for each data source.
 
@@ -11,9 +13,8 @@ Liveable is a Python CLI assistant that takes a US ZIP code and answers neighbor
 ## Requirements
 - Python 3.10+
 - Anthropic API key (`ANTHROPIC_API_KEY`)
-- API keys for Google Places, Census, and Walk Score
-- Laminar project API key
-- Optional: RentCast, HUD FMR, and Serper API keys for housing/crime sections
+- Laminar project API key (`LMNR_PROJECT_API_KEY`)
+- Optional: Google Places, Census, Walk Score, RentCast, HUD FMR, and Browser Use API keys
 
 ## Setup
 ```bash
@@ -36,33 +37,23 @@ Compare two locations:
 /compare 20001 20878
 ```
 
-## API Keys (Where to get them)
-Required:
-- Anthropic: https://console.anthropic.com/
-- Laminar: https://www.lmnr.ai/
-- Google Places (Maps Platform): https://console.cloud.google.com/apis/credentials
-- Census API: https://api.census.gov/data/key_signup.html
-- Walk Score: https://www.walkscore.com/professional/api-sign-up.php
-
-Optional (recommended for richer answers):
-- RentCast: https://www.rentcast.io/api
-- HUD User API (FMR): https://www.huduser.gov/portal/datasets/hudapi.html
-- Browser Use Cloud: https://cloud.browser-use.com
-
-No key required:
-- Overpass API (OSM) — used for noise proxies and amenity counts (https://overpass-api.de/api/interpreter)
-
-## Environment Variables
-See `.env.example` for the full list. Optional variables:
-- `CLAUDE_MODEL` — override the Claude model (defaults to `claude-sonnet-4-20250514`)
-- `LIVEABLE_USER_ID` — sets Laminar trace user id (defaults to your OS user)
-- `LMNR_TRACE_BASE_URL` — override the trace base URL for printing
-- `HUD_API_KEY` — HUD User API key for Fair Market Rent data
-- `RENTCAST_API_KEY` — RentCast API key for sales/listings and market stats
-- `BROWSER_USE_API_KEY` — Browser Use Cloud API key for crime data web search
-- `OVERPASS_URL` — optional override for Overpass endpoint (defaults to https://overpass.private.coffee/api/interpreter)
-- `DEV_PERMITS_BASE_URL` — optional open-data endpoint for permits/developments
-- `DEV_PERMITS_QUERY` — optional query template for filtering permits by zip/city
+## API Keys & Environment Variables
+| Variable | Required | Purpose | Get a key |
+| --- | --- | --- | --- |
+| `ANTHROPIC_API_KEY` | Yes | Claude Agent SDK | https://console.anthropic.com/ |
+| `LMNR_PROJECT_API_KEY` | Yes | Laminar tracing | https://www.lmnr.ai/ |
+| `GOOGLE_PLACES_API_KEY` | No | Google Places (ratings/quality) | https://console.cloud.google.com/apis/credentials |
+| `CENSUS_API_KEY` | No | Census ACS demographics | https://api.census.gov/data/key_signup.html |
+| `WALKSCORE_API_KEY` | No | Walk Score API | https://www.walkscore.com/professional/api-sign-up.php |
+| `RENTCAST_API_KEY` | No | RentCast sales/listings + market stats | https://www.rentcast.io/api |
+| `HUD_API_KEY` | No | HUD Fair Market Rent data | https://www.huduser.gov/portal/datasets/hudapi.html |
+| `BROWSER_USE_API_KEY` | No | Browser Use Cloud (crime web search) | https://cloud.browser-use.com |
+| `OVERPASS_URL` | No | Overpass endpoint override | https://overpass.private.coffee/api/interpreter |
+| `DEV_PERMITS_BASE_URL` | No | Open-data permits/development endpoint | n/a |
+| `DEV_PERMITS_QUERY` | No | Query template for permits filtering | n/a |
+| `CLAUDE_MODEL` | No | Override model (default `claude-sonnet-4-20250514`) | n/a |
+| `LIVEABLE_USER_ID` | No | Laminar trace user id | n/a |
+| `LMNR_TRACE_BASE_URL` | No | Override trace base URL | n/a |
 
 ## Notes
 - If any data source fails, the agent will note reduced confidence in its answers.
