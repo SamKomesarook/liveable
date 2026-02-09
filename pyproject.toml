@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.24.2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "liveable"
+version = "0.1.0"
+description = "Neighborhood liveability report agent"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Liveable" }]
+dependencies = [
+  "claude-agent-sdk",
+  "lmnr[claude-agent-sdk]",
+  "browser-use-sdk",
+  "httpx",
+  "rich",
+  "python-dotenv",
+]
+
+[project.scripts]
+liveable = "liveable.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/liveable"]
