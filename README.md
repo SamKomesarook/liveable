@@ -1,6 +1,6 @@
-<video src="Area.mp4" controls width="100%"></video>
-
 # Liveable
+
+![Liveable](screenshot.png)
 
 Liveable is a Python CLI assistant that takes a US ZIP code and answers neighborhood questions conversationally. It uses the Claude Agent SDK with Laminar observability instrumentation and custom MCP tools for each data source.
 
